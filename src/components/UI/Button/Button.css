@@ -8,12 +8,13 @@
     padding: 10px;
     margin: 10px;
     font-weight: bold;
+    width: 40%;
 }
 
-.Button:first-of-type {
+/* .Button:first-of-type {
     margin-left: 0;
     padding-left: 0;
-}
+} */
 
 .Success {
     color: #5C9210;

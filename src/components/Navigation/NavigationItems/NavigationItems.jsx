@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './NavigationItems.module.css';
+import './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 const NavigationItems = () => {
     return (
-        <ul className={styles.NavigationItems}>
+        <ul className='NavigationItems'>
             <NavigationItem link="/" active>Burger Builder</NavigationItem>
-            <NavigationItem link="/">Checkout</NavigationItem>
+            <NavigationItem link="/checkout">Checkout</NavigationItem>
         </ul>
     );
 };

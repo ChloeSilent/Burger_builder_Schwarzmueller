@@ -1,12 +1,14 @@
-import React from 'react';
-import styles from './Button.module.css'
+import React from "react";
+import "./Button.css";
 const Button = (props) => {
-    return (
-        <button
-        onClick={props.clicked}
-        className={[styles.Button, styles[props.buttonType]].join(' ')}
-        >{props.children}</button>
-    );
+  let classes = [props.buttonType, "Button"];
+  console.log(props.buttonType)
+  return (
+    
+    <button onClick={props.clicked} className={classes.join(" ")}>
+      {props.children}
+    </button>
+  );
 };
 
 export default Button;
