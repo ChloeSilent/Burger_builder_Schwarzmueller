@@ -4,21 +4,22 @@ import styles from './Burger.module.css';
 
 const burger = (props) => {
 
-  let transformedIngridients = Object.keys(props.ingridients).map(item => {
-    return [...Array(props.ingridients[item])].map((_, i) => {
+  let transformedingredients = Object.keys(props.ingredients).map(item => {
+      console.log(item,props.ingredients[item])
+    return [...Array(props.ingredients[item])].map((_, i) => {
       return <BurgerIngridient key={item + i} type={item} />
     })
   }).flat()
 
 
-  if (transformedIngridients.length === 0) {
-    transformedIngridients = (<p>Please start adding ingridients</p>)
+  if (transformedingredients.length === 0) {
+    transformedingredients = (<p>Please start adding ingredients</p>)
   }
 
   return (
     <div className={styles.Burger}>
       <BurgerIngridient type='bread-top' />
-      {transformedIngridients}
+      {transformedingredients}
       <BurgerIngridient type='bread-bottom' />
     </div>
   );
