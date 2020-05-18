@@ -21,7 +21,7 @@ class BurgerBuilder extends Component {
             bacon: 1,
             cheese: 1,
             meat: 1,
-          },
+        },
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
@@ -30,27 +30,28 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount() {
-        //console.log(this.props);
+
         axios.get('https://burgerbuilder-8ab50.firebaseio.com/ingredients.json')
             .then(response => {
-                console.log("res", response.data)
+
                 this.setState({ ingredients: response.data });
             })
             .catch(error => {
                 this.setState({ error: true });
             });
-            console.log("state", this.state.ingredients)
+
     }
 
     updatePurchaseState(ingredients) {
+
         let sum = Object.values(ingredients).reduce(function (sum, current) {
             return sum + current;
         }, 0);
 
-        this.setState({ purchaseable: sum >= 0 });
+        this.setState({ purchasable: sum >= 0 });
     }
 
-    addIngridientHandler = (type) => {
+    addIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type];
         const upatedCount = oldCount + 1;
         const updatedingredients = { ...this.state.ingredients };
@@ -67,7 +68,7 @@ class BurgerBuilder extends Component {
         this.updatePurchaseState(updatedingredients);
     };
 
-    removeIngridientHandler = (type) => {
+    removeIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type];
 
         if (oldCount <= 0) {

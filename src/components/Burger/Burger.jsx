@@ -5,7 +5,7 @@ import styles from './Burger.module.css';
 const burger = (props) => {
 
   let transformedingredients = Object.keys(props.ingredients).map(item => {
-      console.log(item,props.ingredients[item])
+      
     return [...Array(props.ingredients[item])].map((_, i) => {
       return <BurgerIngridient key={item + i} type={item} />
     })

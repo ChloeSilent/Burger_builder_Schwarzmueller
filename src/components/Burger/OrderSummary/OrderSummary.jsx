@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../UI/Button/Button'
 const orderSummary = (props) => {
-console.log("props.ingredients", props.ingredients)
+
     const ingredientsummary = Object.keys(props.ingredients).map(item => {
         return (<li key={item}>
             <span style={{ textTransform: 'capitalize' }}>
