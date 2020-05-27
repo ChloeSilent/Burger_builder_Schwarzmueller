@@ -74,7 +74,7 @@ export default class ContactData extends Component {
                 value: 'fastest',
                 validation: {
                     required: false,
-                }, valid: false,
+                }, valid: true,
                 touched: false
             }
         },
@@ -131,7 +131,7 @@ export default class ContactData extends Component {
         updatedFormElement.touched = true;
         updatedFormElement.valid = this.checkValidity(event.target.value, updatedFormElement.validation)
         updatedOrderForm[inputIdentifyer] = updatedFormElement
-        let formIsValid = false;
+        let formIsValid = true;
         for(let inputIdentifyer in updatedOrderForm){
             formIsValid = updatedOrderForm[inputIdentifyer].valid && formIsValid;
         }
