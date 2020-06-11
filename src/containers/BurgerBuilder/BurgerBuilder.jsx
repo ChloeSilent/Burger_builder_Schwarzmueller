@@ -6,6 +6,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary.jsx";
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axios from '../../axios-orders';
+import { connect } from "react-redux";
 
 import { withRouter } from "react-router-dom";
 const INGRIDIENT_PRICES = {
@@ -34,7 +35,8 @@ class BurgerBuilder extends Component {
         axios.get('https://burgerbuilder-8ab50.firebaseio.com/ingredients.json')
             .then(response => {
 
-                this.setState({ ingredients: response.data });
+                // this.setState({ ingredients: response.data });
+                this.props.fetchIngredients(response.data)
             })
             .catch(error => {
                 this.setState({ error: true });
@@ -126,8 +128,8 @@ class BurgerBuilder extends Component {
                 <Auxiliary>
                     <Burger ingredients={this.state.ingredients} />
                     <BuildControls
-                        ingredientAdded={this.addIngredientHandler}
-                        ingredientRemoved={this.removeIngredientHandler}
+                        ingredientAdded={this.props.addIngredientHandler}
+                        ingredientRemoved={this.props.removeIngredientHandler}
                         disabled={disabledInfo}
                         purchasable={this.state.purchasable}
                         ordered={this.purchaseHandler}
@@ -157,4 +159,21 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default withRouter(BurgerBuilder);
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice
+    };
+};
+
+const dispatchToProps = (dispatch) => {
+    return {
+        fetchIngredients: (t) => dispatch({ type: 'FETCH_INGREDIENTS', t }),
+        personAddedHandler: (t) => dispatch({ type: 'ADD_INGREDIENT_HANDLER', t }),
+        removeIngredientHandler: (t) => dispatch({ type: 'REMOVE_INGREDIENT_HANDLER', t}),
+    };
+};
+
+export default connect(mapStateToProps, dispatchToProps)(withRouter(BurgerBuilder));
+
