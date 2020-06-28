@@ -3,8 +3,9 @@ import Button from '../../../components/UI/Button/Button';
 import './ContactData.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Input from '../../../components/UI/Inputs/Input'
-export default class ContactData extends Component {
+import Input from '../../../components/UI/Inputs/Input';
+import { connect } from "react-redux";
+class ContactData extends Component {
 
     state = {
         orderForm: {
@@ -109,7 +110,7 @@ export default class ContactData extends Component {
         }
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.price,
+            price: this.props.totalPrice,
             orderData: formData
         }
         axios.post('orders.json', order).then(res => {
@@ -132,7 +133,7 @@ export default class ContactData extends Component {
         updatedFormElement.valid = this.checkValidity(event.target.value, updatedFormElement.validation)
         updatedOrderForm[inputIdentifyer] = updatedFormElement
         let formIsValid = true;
-        for(let inputIdentifyer in updatedOrderForm){
+        for (let inputIdentifyer in updatedOrderForm) {
             formIsValid = updatedOrderForm[inputIdentifyer].valid && formIsValid;
         }
         this.setState({ orderForm: updatedOrderForm, formIsValid })
@@ -150,7 +151,7 @@ export default class ContactData extends Component {
                 value={this.state.orderForm[key].value}
                 invalid={!this.state.orderForm[key].valid}
                 shouldValidate={this.state.orderForm[key].validation}
-                touched = {this.state.orderForm[key].touched}
+                touched={this.state.orderForm[key].touched}
                 changed={(e) => { this.inputChangeHandler(e, key) }} />)
         }
         let form =
@@ -171,3 +172,12 @@ export default class ContactData extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice
+    };
+};
+
+export default connect(mapStateToProps)(ContactData);
